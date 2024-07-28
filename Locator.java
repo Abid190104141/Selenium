@@ -9,11 +9,12 @@ public class Locator {
     public static void main(String[] args) {
 
         System.setProperty("webdriver.chrome.driver","C:\\Users\\user\\Downloads\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-       driver.get("https://rahulshettyacademy.com/locatorspractice/");
-       driver.findElement(By.id("inputUsername")).sendKeys("Abid");
-       driver.findElement(By.name("inputPassword")).sendKeys("hello123");
-        driver.findElement(By.className("signInBtn")).click();
+         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+         WebDriver driver = new ChromeDriver();
+        driver.get("https://rahulshettyacademy.com/locatorspractice/");
+        driver.findElement(By.id("inputUsername")).sendKeys("Abid");
+        driver.findElement(By.name("inputPassword")).sendKeys("hello123");
+         driver.findElement(By.className("signInBtn")).click();
 
 
 
