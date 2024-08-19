@@ -1,0 +1,54 @@
+package day1;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class ActionDemo1{
+
+    public static void main(String[] args) {
+
+        // Set the path to the ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver.exe");
+
+        // Initialize the WebDriver (Chrome)
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        // Navigate to the Amazon website
+        driver.get("https://www.amazon.com/");
+
+        // Initialize the Actions class
+        Actions actions = new Actions(driver);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.location.reload();");
+
+
+
+        // Locate the "Account & Lists" element and move the mouse to it
+        WebElement accountListElement = driver.findElement(By.cssSelector("a[id='nav-link-accountList']"));
+
+       // actions.moveToElement(driver.findElement(By.id("twotabsearchtextbox"))).click().keyDown(keys.SHIFT).sendKeys("hello").build().perform();
+
+        WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
+
+        actions.moveToElement(searchBox)
+                .doubleClick()
+                .keyDown(Keys.SHIFT)
+                .sendKeys("HELLO")
+                .keyUp(Keys.SHIFT) // Ensure to release the SHIFT key
+                .build()
+                .perform();
+
+
+        actions.moveToElement(accountListElement).contextClick().build().perform();
+       
+
+
+
+        // (Optional) Add further actions or assertions here
+
+        // Close the browser
+        //driver.quit();
+    }
+}
