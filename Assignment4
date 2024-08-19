@@ -1,0 +1,44 @@
+package day1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.Iterator;
+import java.util.Set;
+
+public class Assignment4 {
+
+    public static void main(String[] args) {
+
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Downloads\\chromedriver.exe");
+
+        // Initialize the WebDriver (Chrome)
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/");
+
+        // Click on the "Multiple Windows" link
+        driver.findElement(By.linkText("Multiple Windows")).click();
+
+        // Click on the "Click Here" link
+        driver.findElement(By.cssSelector("a[href='/windows/new']")).click();
+
+        // Handle window switching
+        Set<String> abc = driver.getWindowHandles();
+        Iterator<String> it = abc.iterator();
+
+        String parentWindow = it.next();  // Get parent window
+        String childWindow = it.next();   // Get child window
+
+        driver.switchTo().window(childWindow);  // Switch to child window
+
+        // Print the text in the child window
+        System.out.println(driver.findElement(By.xpath("//div[@id='content']/div/h3")).getText());
+
+        // Switch back to the parent window (optional)
+        driver.switchTo().window(parentWindow);
+
+        // Close the browser
+        driver.quit();
+    }
+}
